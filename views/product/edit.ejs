@@ -1,0 +1,93 @@
+<%- include('../header')%>
+<!-- Left side column. contains the sidebar -->
+<%- include('../aside')%>
+<!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 style="text-align: center">Sửa mới sản phẩm</h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content" style="display: flex; justify-content: center">
+    <div class="wapper" style="width: 40vw">
+      <form method="post" action=""  enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Tên sản phẩm</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Nhập tên sản phẩm"
+            value="<%= options.name %>"
+          />
+          <div class="form-grop">
+            <h5><b>Tên danh mục</b></h5>
+            <select
+              style="width: 40vw"
+              class="form-select"
+              aria-label="Default select example"
+              name="categoryid"
+              
+            >
+              <% for ( var i = 0; i < optionss.length; i++ ) { %>
+              <option value="<%=optionss[ i ].id %>">
+                <%= optionss[ i ].name %>
+              </option>
+              <% } %>
+            </select>
+          </div>
+          <div class="form-group" style="margin-top: 10px;">
+            <label for="name">Ảnh sản phẩm</label>
+            <input
+              type="file"
+              class="form-control"
+              id="image"
+              name="image" 
+              required
+            />
+        </div>
+          <div class="form-group">
+            <label for="name">Giá sản phẩm</label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              placeholder="Nhập giá sản phẩm"
+              value="<%= options.price %>"
+            />
+        </div>
+          <div class="form-group">
+            <label for="name">Số lượng sản phẩm</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantity"
+              name="quantity"
+              placeholder="Nhập số lượng sản phẩm"
+              value="<%= options.quantity %>"
+            />
+        </div>
+          <div class="form-group">
+            <label for="name">Thông tin chi tiết sản phẩm</label>
+            <textarea name="description" id="" cols="84 " rows="7" ><%= options.description %></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- /.content-wrapper -->
+<%- include('../footer') %>
+<script>
+  function confirmDelete(str) {
+    return window.confirm(str) == true ? true : false;
+  }
+</script>

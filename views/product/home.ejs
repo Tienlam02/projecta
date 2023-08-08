@@ -1,0 +1,149 @@
+<%- include('../header')%>
+<!-- Left side column. contains the sidebar -->
+<%- include('../aside')%>
+<!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper" style="min-height: 608px !important">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 style="text-align: center; font-weight: 900">QUẢN LÝ SẢN PHẨM</h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content" style="display: flex; justify-content: center">
+    <div class="wapper-wapper" style="background-color: #fff">
+      <button
+        style="margin-right: 20px; margin-bottom: 15px"
+        type="button"
+        class="btn btn-lg btn-linkedin"
+      >
+        <a style="color: #fff" href="/product/add">
+          <i style="margin: 10px 0" class="fa fa-plus"> </i>Thêm mới sản phẩm</a
+        >
+      </button>
+
+      <form
+        style="margin: 10px 0"
+        action=""
+        method="get"
+        class="form-inline"
+        role="form"
+      >
+        <div class="form-group">
+          <label class="sr-only" for=""> </label>
+          <input
+            style="width: 70vh"
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Nhập tên sản phẩm để tìm kiếm"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+      </form>
+      <h4><%= typeof mess != "undefined" && mess ? mess : '' %></h4>
+      <% if (datas.length > 0) { %>
+      <table
+        class="table table-hover table-dark"
+        style="text-align: center; vertical-align: middle"
+      >
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Tên danh mục</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Ảnh</th>
+            <th scope="col">Mô tả</th>
+            <th scope="col">Số lượng hiện có</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < datas.length; i++ ) { %>
+          <tr>
+            <td style="text-align: center; vertical-align: middle">
+              <%= i+1 %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <%= datas[i].name %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <%= datas[i].catname %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <%= datas[i].price %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <img
+                src="/images/<%= datas[i].image %>"
+                alt=""
+                style="width: 70px; height: 70px"
+              />
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <%= datas[i].description %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <%= datas[i].quantity %>
+            </td>
+            <td style="text-align: center; vertical-align: middle">
+              <button type="button" class="btn">
+                <a href="/product/edit/<%= datas[i].id %>" style>
+                  <i style="margin-right: 10px" class="fa fa-edit"></i>Sửa</a
+                >
+              </button>
+
+              <button
+                style="text-align: center; vertical-align: middle"
+                type="button"
+                class="btn btn-danger"
+              >
+                <a
+                  onclick="return confirmDelete('Bạn có chắc chẵn muuốn xóa ')"
+                  style="color: #fff"
+                  href="/product/delete/<%= datas[i].id %>"
+                >
+                  <i style="margin-right: 10px" class="fa fa-trash"></i>Xóa</a
+                >
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <% }%>
+        <tfoot></tfoot>
+      </table>
+      <% if(totalPage){%>
+      <ul class="pagination">
+        <li>
+          <a href="/product/?page=<%=_page > 1 ? _page - 1 : _page %>"
+            >&laquo;</a
+          >
+        </li>
+        <% for(let i = 0; i < totalPage; i++) { %>
+        <li class="<%= i + 1 == _page ? 'active' : '' %>">
+          <a href="/product/?page=<%= i+ 1 %>"><%= i+ 1 %></a>
+        </li>
+        <% } %>
+        <li>
+          <a href="/product/?page=<%= _page < totalPage ? _page + 1 : _page %>"
+            >&raquo;</a
+          >
+        </li>
+        <%}%>
+      </ul>
+      <% }%>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- /.content-wrapper -->
+<%- include('../footer') %>
+<script>
+  function confirmDelete(str) {
+    return window.confirm(str) == true ? true : false;
+  }
+</script>

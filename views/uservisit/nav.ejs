@@ -1,0 +1,89 @@
+<header id="header" class="d-flex align-items-center">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="logo">
+      <h1><a href="index.html">Web bán hàng demo</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    </div>
+    <div>
+      <form class="d-flex" action="" method="get">
+        <div class="form-outline">
+          <input
+            id="search-input"
+            type="search"
+            id="form1"
+            class="form-control"
+            name="name"
+          />
+        </div>
+        <button
+          type="submit"
+          id="search-button"
+          type="button"
+          class="btn btn-primary"
+        >
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+    </div>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li>
+          <a class="active" href="/"
+            ><i class="bi bi-house-door"></i> Trang Chủ</a
+          >
+        </li>
+        <li class="dropdown">
+          <a href="#"
+            ><span><i class="bi bi-shop-window"></i>Danh mục</span>
+            <i class="bi bi-chevron-down"></i
+          ></a>
+          <ul>
+            <% lcCate.forEach((item) => { %>
+            <li>
+              <a href="/getProduct/<%= item.id %>"><%= item.name %></a>
+            </li>
+            <% }) %>
+          </ul>
+        </li>
+        <li><a href="#">About</a></li>
+
+        <li class="dropdown">
+          <a href="#"
+            ><span
+              ><i class="bi bi-person-gear"></i> <% if( typeof user !=
+              "undefined" && user ? user : false ) {%> Chào bạn <%=
+              user.fullname%> <% }else { %> Cá nhân <%}%>
+            </span>
+            <i class="bi bi-chevron-down"></i
+          ></a>
+          <ul>
+            <% if(user ) {%>
+            <li><a href="/user/logout">Đăng xuất</a></li>
+            <li><a href="/user/viewProfile">Xem hồ sơ</a></li>
+            <% }else { %>
+            <li><a href="/login">Đăng nhập</a></li>
+            <%}%> <% if( !user ) {%>
+            <li><a href="/register">Đăng ký</a></li>
+            <% } %>
+          </ul>
+        </li>
+        <li>
+          <a href="/user/getCart" title="Go to Cart" class="position-relative"
+            ><i style="font-size: 2rem" class="bi bi-cart-plus">
+              <% if(typeof arr != "undefined" && arr ? true : false){ %>
+              <span
+                class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger fs-6"
+              >
+                <%= typeof arr != "undefined" && arr ? arr.length : '' %>
+              </span>
+              <%}%></i
+            ></a
+          >
+        </li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    <!-- .navbar -->
+  </div>
+</header>

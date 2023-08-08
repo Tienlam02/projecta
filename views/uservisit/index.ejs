@@ -1,0 +1,212 @@
+<%- include('header') %> <%- include('nav') %>
+<!-- ======= Header ======= -->
+
+<!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+  <div class="hero-container">
+    <div
+      id="heroCarousel"
+      data-bs-interval="5000"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide 1 -->
+        <div
+          class="carousel-item active"
+          style="background-image: url(assets/img/slide/slide-1.jpg)"
+        >
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">
+                Welcome to <span>Web bán hàng demo</span>
+              </h2>
+              <p class="animate__animated animate__fadeInUp">
+                Web bán hàng demo là một nền tảng mua sắm trực tuyến phổ biến,
+                cung cấp một loạt các sản phẩm từ nhiều danh mục khác nhau.
+                Trang web này có một giao diện thân thiện với người dùng và cung
+                cấp trải nghiệm mua sắm thuận tiện.
+              </p>
+              <a
+                href=""
+                class="btn-get-started animate__animated animate__fadeInUp"
+                >Read More</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div
+          class="carousel-item"
+          style="background-image: url(assets/img/slide/slide-2.jpg)"
+        >
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated fanimate__adeInDown">
+                Welcome <span>Web bán hàng demo</span>
+              </h2>
+              <p class="animate__animated animate__fadeInUp">
+                Web bán hàng demo là một nền tảng mua sắm trực tuyến phổ biến,
+                cung cấp một loạt các sản phẩm từ nhiều danh mục khác nhau.
+                Trang web này có một giao diện thân thiện với người dùng và cung
+                cấp trải nghiệm mua sắm thuận tiện.
+              </p>
+              <a
+                href=""
+                class="btn-get-started animate__animated animate__fadeInUp"
+                >Read More</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div
+          class="carousel-item"
+          style="background-image: url(assets/img/slide/slide-3.jpg)"
+        >
+          <div class="carousel-container">
+            <div class="carousel-content">
+              <h2 class="animate__animated animate__fadeInDown">
+                Welcome <span>Web bán hàng demo</span>
+              </h2>
+              <p class="animate__animated animate__fadeInUp">
+                Web bán hàng demo là một nền tảng mua sắm trực tuyến phổ biến,
+                cung cấp một loạt các sản phẩm từ nhiều danh mục khác nhau.
+                Trang web này có một giao diện thân thiện với người dùng và cung
+                cấp trải nghiệm mua sắm thuận tiện.
+              </p>
+              <a
+                href=""
+                class="btn-get-started animate__animated animate__fadeInUp"
+                >Read More</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="carousel-control-prev"
+        href="#heroCarousel"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span
+          class="carousel-control-prev-icon bi bi-chevron-left"
+          aria-hidden="true"
+        ></span>
+      </a>
+
+      <a
+        class="carousel-control-next"
+        href="#heroCarousel"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span
+          class="carousel-control-next-icon bi bi-chevron-right"
+          aria-hidden="true"
+        ></span>
+      </a>
+    </div>
+  </div>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+  <section id="services" class="services">
+    <div class="container">
+      <h2 class="mb-4">SẢN PHẨM PHỔ BIẾN</h2>
+      <div class="row">
+        <% if(result.length == 0) { %>
+        <h3>Không tồn tại sản phẩm bạn tìm kiếm</h3>
+
+        <% } %> <% for(let i = 0; i < result.length; i++) { %>
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="icon-box">
+            <img
+              style="width: 60%; height: 60%"
+              src="/images/<%=result[i].image %>"
+            />
+
+            <h4 style="margin-top: 30px">
+              <a href="/detail/<%=result[i].id %>"><%=result[i].name %></a>
+            </h4>
+            <p style="font-weight: 900">
+              <% const VND = new Intl.NumberFormat("vi-VN", { style: "currency",
+              currency: "VND", }); %> Giá: <%= VND.format(result[i].price) %>
+            </p>
+            <div style="margin-top: 20px">
+              <button
+                class="p-2"
+                style="border-radius: 10px; margin-right: 5px"
+              >
+                <a
+                  href="/user/cart/?id=<%= result[i].id %>&name=<%= result[i].name %>&price=<%= result[i].price %>&image=<%= result[i].image %>&categoryid=<%= result[i].categoryid %>&description=<%= result[i].decsription %>"
+                  ><i class="bi bi-cart-plus"></i>
+                  <span class="fs-6" style="color: #031407"
+                    >Thêm vào giỏ hàng</span
+                  ></a
+                >
+              </button>
+              <button type="button" class="btn btn-danger p-2">
+                <a style="color: #fff" href="/user/cart"
+                  ><i class="bi bi-plus-square"></i>
+                  <span class="fs-6"> Mua ngay</span></a
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+        <% } %> <% if (totalPage > 1) { %>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center mt-3">
+            <li class="page-item <%= totalPage == 0 ? 'disabled' : '' %>">
+              <a
+                class="page-link"
+                href="/?page=<%=_page > 1 ? _page - 1 : _page %>"
+                >&laquo;</a
+              >
+            </li>
+            <% for(let i = 0; i < totalPage; i++) { %> <% if(check) { %>
+            <li class="page-item <%= i + 1 == _page ? 'active' : '' %>">
+              <a class="page-link" href="/?page=<%= i+ 1 %>&name=<%= check%>"
+                ><%= i+ 1 %></a
+              >
+            </li>
+            <% } else { %>
+            <li class="page-item <%= i + 1 == _page ? 'active' : '' %>">
+              <a class="page-link" href="/?page=<%= i+ 1 %>"><%= i+ 1 %></a>
+            </li>
+            <% } %> <% } %>
+            <li class="page-item <%= totalPage == 0 ? 'disabled' : '' %>">
+              <a
+                class="page-link"
+                href="/?page=<%=_page < totalPage ? _page + 1 : _page %>"
+                >&raquo;</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  <!-- End Services Section -->
+
+  <!-- ======= Clients Section ======= -->
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+
+<%- include('footer') %>
+
+<script></script>

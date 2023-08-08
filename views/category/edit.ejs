@@ -1,0 +1,34 @@
+<%- include('../header')%>
+<!-- Left side column. contains the sidebar -->
+<%- include('../aside')%>
+<!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 style="text-align: center">Sửa danh mục</h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <form method="POST" action="">
+      <div class="form-group">
+        <label for="name">Tên danh mục</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          autofocus="autofocus"
+          value="<%= datas.name %>"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%- include('../footer') %>

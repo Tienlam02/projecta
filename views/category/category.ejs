@@ -1,0 +1,150 @@
+<%- include('../header')%>
+<!-- Left side column. contains the sidebar -->
+<%- include('../aside')%>
+<!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1 style="text-align: center">Quản lý danh mục sản phẩm</h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content" style="display: flex; justify-content: center">
+    <div class="wapper">
+      <button
+        type="button"
+        class="btn btn-primary btn-lg"
+        data-toggle="modal"
+        data-target="#flipFlop"
+        style="margin: 20px 0"
+      >
+        <i class="fa fa-plus"></i> Thêm mới danh mục
+      </button>
+
+      <!-- The modal -->
+      <div
+        class="modal fade"
+        id="flipFlop"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="modalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="modalLabel">Thêm mới danh mục</h4>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="/category/add">
+                <div class="form-group">
+                  <label for="name">Tên danh mục</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    autofocus="autofocus"
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form
+        style="margin: 10px 0"
+        action=""
+        method="get"
+        class="form-inline"
+        role="form"
+      >
+        <div class="form-group">
+          <label class="sr-only" for=""> </label>
+          <input
+            style="width: 70vh"
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Nhập tên danh mục để tìm kiếm"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+      </form>
+      <h4><%= typeof mess != "undefined" && mess ? mess : '' %></h4>
+      <% if (datas.length > 0) { %>
+      <table class="table table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên danh mục</th>
+            <th scope="col">Acction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < datas.length; i++ ) { %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= datas[i].name %></td>
+            <td>
+              <button
+                style="margin-right: 20px"
+                type="button"
+                class="btn btn-lg"
+              >
+                <a href="/category/edit/<%= datas[i].id %>" style>
+                  <i style="margin-right: 10px" class="fa fa-edit"></i>Sửa</a
+                >
+              </button>
+
+              <button type="button" class="btn btn-lg btn-danger">
+                <a
+                  onclick="return confirmDelete('Bạn có chắc chẵn muuốn xóa ')"
+                  style="color: #fff"
+                  href="/category/delete/<%= datas[i].id %>"
+                >
+                  <i style="margin-right: 10px" class="fa fa-trash"></i>Xóa</a
+                >
+              </button>
+            </td>
+          </tr>
+
+          <% }%>
+        </tbody>
+      </table>
+      <%}%>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- /.content-wrapper -->
+<%- include('../footer') %>
+<script>
+  function confirmDelete(str) {
+    return window.confirm(str) == true ? true : false;
+  }
+</script>

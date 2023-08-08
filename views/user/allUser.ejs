@@ -1,0 +1,100 @@
+<%- include('../header.ejs')%>
+<!-- Left side column. contains the sidebar -->
+<%- include('../aside')%>
+<!-- =============================================== -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <section class="content-header">
+      <h1 style="text-align: center">Quản lý người dùng</h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content" style="display: flex; justify-content: center">
+      <div class="wapper">
+        <form
+          style="margin: 10px 0"
+          action=""
+          method="get"
+          class="form-inline"
+          role="form"
+        >
+          <div class="form-group">
+            <label class="sr-only" for=""> </label>
+            <input
+              style="width: 70vh"
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Nhập tên người dùng để tìm kiếm"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </form>
+        <% if (users) { %>
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col">Ảnh</th>
+              <th scope="col">Tên người dùng</th>
+              <th scope="col">Quyền</th>
+              <th scope="col">Acction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 0; i < users.length; i++ ) { %>
+            <tr>
+              <td style="text-align: center; vertical-align: middle">
+                <%= i+1 %>
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+                <img
+                  style="width: 100px; height: 120px"
+                  src="/images/<%= users[i].image %>"
+                  alt=""
+                />
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+                <%= users[i].fullname %>
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+                <%= users[i].permission %>
+              </td>
+              <td style="text-align: center; vertical-align: middle">
+                <button
+                  style="margin-right: 20px"
+                  type="button"
+                  class="btn btn-lg"
+                >
+                  <a
+                    href="/user/editPermission/?id=<%= users[i].id %>&permission=<%= users[i].permission %>"
+                    style
+                  >
+                    <i style="margin-right: 10px" class="fa fa-edit"></i>Sửa
+                    quyền</a
+                  >
+                </button>
+              </td>
+            </tr>
+
+            <% }%>
+          </tbody>
+        </table>
+        <%}%>
+      </div>
+    </section>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <!-- Default box -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%- include('../footer') %>
